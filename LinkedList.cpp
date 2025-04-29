@@ -1,5 +1,6 @@
 #include "LinkedList.h"
 #include <iostream>
+#include <limits>
 
 LinkedList::LinkedList(){
     head = nullptr;
@@ -118,12 +119,11 @@ bool LinkedList::deletePosition(int pos){
     //actually deleting the node!
     else{
 
-        current->setLink(current->getLink()->getLink());        //seg fault here or line below
-        delete current->getLink();
+        current->setLink(current->getLink()->getLink());        //seg fault here when used a second time
 
-        //std::cout << current->getData() << " " << current->getLink()->getData() << " " << current->getLink()->getLink()->getData() << "\n";
-
-        //need to address the case for pos = 5
+        // if (current->getLink() != nullptr){
+        //     Node* next = current->getLink();
+        // }
 
         return true;
     }
@@ -131,11 +131,46 @@ bool LinkedList::deletePosition(int pos){
 }
 
 int LinkedList::get(int pos){
-    return 0;
+    //case for pos being non-pos
+    if (pos < 1){
+        return std::numeric_limits<int>::max();
+    }
+
+    //initialising variables
+    int iterator = 1;
+    Node* current = head->getLink();
+
+    while (iterator != pos){
+        if(current->getLink() == nullptr){
+            return std::numeric_limits<int>::max();
+        }
+
+        current = current->getLink();
+        iterator++;
+    }
+
+    return current->getData();
+
 }
 
 int LinkedList::search(int target){
-    return 0;
+    int iterator = 1;
+    Node* current = head->getLink();
+
+    while (current->getLink() != nullptr){
+        if (current->getData() == target){
+            return iterator;
+        }
+        
+        iterator++;
+        current = current->getLink();
+    }
+
+    if (current->getData() == target){
+        return iterator;
+    }
+
+    return -1;
 }
 
 void LinkedList::printList(){

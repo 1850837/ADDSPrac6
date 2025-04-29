@@ -110,9 +110,7 @@ int main(){
 
 	a.printList();
 
-	bool b = a.deletePosition(4);
-
-	a.printList();
+	int b = a.search(6);
 
 	std::cout << b << "\n";
 
