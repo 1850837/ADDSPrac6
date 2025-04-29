@@ -21,6 +21,7 @@ int Node::getData(){
 
 void Node::setData(int newData){
     data = newData;
+    return;
 }
 
 Node* Node::getLink(){
@@ -29,4 +30,10 @@ Node* Node::getLink(){
 
 void Node::setLink(Node* newLink){
     link = newLink;
+    return;
+}
+
+void Node::setNext(Node* newNode){
+    link = newNode->getLink();
+    return;
 }

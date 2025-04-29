@@ -66,36 +66,36 @@ int main(void) {
     LinkedList submissionList(input_array, array_size);
 
     // run function on the list depending on letter code, using the parameters
-    if (commandCode=="I") {
-        submissionList.insertPosition(param_array[0], param_array[1]);
-    }
-    else if (commandCode=="D") {
-        if (!submissionList.deletePosition(param_array[0])) {
-            cout << "ERROR ";
-        }
-    }
-    else if (commandCode=="S") {
-		int got = submissionList.search(param_array[0]);
-        if (got == -1) {
-            cout << "ERROR ";
-        }
-        else {
-			std::cout << got << " ";
-		}
-    }
-    else if (commandCode=="G") {
-		int got = submissionList.get(param_array[0]);
-        if (got == numeric_limits<int>::max()) {
-            cout << "ERROR ";
-        }
-        else {
-			std::cout << got << " ";
-		}
-    }
-    else {
-        cout << "invalid command" << endl;
-        return 0;
-    }
+    // if (commandCode=="I") {
+    //     submissionList.insertPosition(param_array[0], param_array[1]);
+    // }
+    // else if (commandCode=="D") {
+    //     if (!submissionList.deletePosition(param_array[0])) {
+    //         cout << "ERROR ";
+    //     }
+    // }
+    // else if (commandCode=="S") {
+	// 	int got = submissionList.search(param_array[0]);
+    //     if (got == -1) {
+    //         cout << "ERROR ";
+    //     }
+    //     else {
+	// 		std::cout << got << " ";
+	// 	}
+    // }
+    // else if (commandCode=="G") {
+	// 	int got = submissionList.get(param_array[0]);
+    //     if (got == numeric_limits<int>::max()) {
+    //         cout << "ERROR ";
+    //     }
+    //     else {
+	// 		std::cout << got << " ";
+	// 	}
+    // }
+    // else {
+    //     cout << "invalid command" << endl;
+    //     return 0;
+    // }
 
     submissionList.printList();
 

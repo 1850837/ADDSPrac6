@@ -16,6 +16,8 @@ class Node {
 
     Node* getLink();
     void setLink(Node* newLink);
+
+    void setNext(Node* newNode);
 };
 
 #endif
