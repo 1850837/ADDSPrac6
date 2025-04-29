@@ -12,11 +12,14 @@ LinkedList::LinkedList(int* array, int len){
         return;
     }
 
+    if (array == nullptr){
+        head = nullptr;
+        return;
+    }
+
     //initialise first node
     Node* current = new Node(array[0]);
     head = new Node(0, current);
-
-    //initialising current pointer
 
     for (int i = 1; i < len; i++){
         Node* next = new Node(array[i]);
@@ -26,19 +29,26 @@ LinkedList::LinkedList(int* array, int len){
 }
 
 LinkedList::~LinkedList(){
+    if (head == nullptr){
+        return;
+    }
+
     //initialise address holder
     Node* current = head;
 
-    while (current->getLink() != nullptr){
+    while (current != nullptr){
         Node* next = current->getLink();
         delete current;
         current = next;
     }
-
-    delete current;
 }
 
 void LinkedList::insertPosition(int pos, int newNum){
+
+    if (head == nullptr){
+        head = new Node(0, new Node(newNum));
+        return;
+    }
 
     //case for inputting at the start
     if (pos <= 1){
@@ -60,7 +70,7 @@ void LinkedList::insertPosition(int pos, int newNum){
             i++;
 
             //case for if the pos is greater than length
-            if (current->getLink() == nullptr){
+            if (current == nullptr){
                 breaker = true;
                 break;
             }
@@ -87,6 +97,12 @@ bool LinkedList::deletePosition(int pos){
     if (pos <= 0){
         return false;
     }
+    if(head == nullptr){
+        return false;
+    }
+    if(head->getLink() == nullptr){
+        return false;
+    }
 
     //initialise variables
     int iterator = 1;
@@ -105,7 +121,7 @@ bool LinkedList::deletePosition(int pos){
         current = current->getLink();
         iterator++;
 
-        if(current->getLink() == nullptr){
+        if(current == nullptr){
             breaker = true;
             break;
         }
@@ -118,12 +134,10 @@ bool LinkedList::deletePosition(int pos){
 
     //actually deleting the node!
     else{
+        Node* toDelete = current->getLink();
+        current->setLink(toDelete->getLink());        //seg fault here when used a second time
 
-        current->setLink(current->getLink()->getLink());        //seg fault here when used a second time
-
-        // if (current->getLink() != nullptr){
-        //     Node* next = current->getLink();
-        // }
+        delete toDelete;
 
         return true;
     }
@@ -135,13 +149,19 @@ int LinkedList::get(int pos){
     if (pos < 1){
         return std::numeric_limits<int>::max();
     }
+    if (head == nullptr){
+        return std::numeric_limits<int>::max();
+    }
+    if (head->getLink() == nullptr){
+        return std::numeric_limits<int>::max();
+    }
 
     //initialising variables
     int iterator = 1;
     Node* current = head->getLink();
 
     while (iterator != pos){
-        if(current->getLink() == nullptr){
+        if(current->getLink() == nullptr || current == nullptr){
             return std::numeric_limits<int>::max();
         }
 
@@ -154,10 +174,14 @@ int LinkedList::get(int pos){
 }
 
 int LinkedList::search(int target){
+    if(head == nullptr || head->getLink() == nullptr){
+        return -1;
+    }
+
     int iterator = 1;
     Node* current = head->getLink();
 
-    while (current->getLink() != nullptr){
+    while (current != nullptr){
         if (current->getData() == target){
             return iterator;
         }
@@ -166,17 +190,13 @@ int LinkedList::search(int target){
         current = current->getLink();
     }
 
-    if (current->getData() == target){
-        return iterator;
-    }
-
     return -1;
 }
 
 void LinkedList::printList(){
 
     //printing nothing if list has no elements
-    if (head == nullptr){
+    if (head == nullptr || head->getLink() == nullptr){
         return;
     }
 
