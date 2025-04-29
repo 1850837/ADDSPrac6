@@ -25,10 +25,56 @@ LinkedList::LinkedList(int* array, int len){
 }
 
 LinkedList::~LinkedList(){
+    //initialise address holder
+    Node* current = head;
 
+    while (current->getLink() != nullptr){
+        Node* next = current->getLink();
+        delete current;
+        current = next;
+    }
+
+    delete current;
 }
 
 void LinkedList::insertPosition(int pos, int newNum){
+
+    //case for inputting at the start
+    if (pos <= 1){
+        Node* a = new Node(newNum, head->getLink());
+        head->setLink(a);
+    }
+
+    //all other cases
+    else {
+        //initialise iterator
+        int i = 1;
+        Node* current = head;
+        bool breaker = false;
+
+        while (i != pos - 1){
+            current = current->getLink();
+            i++;
+
+            //case for if the pos is greater than length
+            if (current->getLink() == nullptr){
+                breaker = true;
+            }
+        }
+
+        //creating new node for breaker == false
+        if (breaker == false){
+            Node* a = new Node(newNum, current->getLink());
+            current->setLink(a);
+        }
+
+        //creating new node for breaker == true
+        else if (breaker == true){
+            Node* a = new Node(newNum);
+            current->setLink(a);
+        }
+    }
+
     return;
 }
 
