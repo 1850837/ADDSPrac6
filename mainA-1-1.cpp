@@ -43,15 +43,13 @@ int main(void) {
 
 	// copy all (but last 2) digits from vector into a c-array (to be passed into LinkedList constructor)
 	int array_size = numeric_inputs.size()-2;
-	std::cout << "hello\n";
 	int * input_array = new int[array_size];		//this is the error line!!
-	std::cout << "hello\n";
 	for(unsigned int i = 0; i < (numeric_inputs.size()-2); i++) {
 		input_array[i] = numeric_inputs[i];
 	}
 
 	// then, copy the last 2 digits from user_input (ie the parameters) into a parameter array
-	int param_array[2] = { 
+	int param_array[2] = {
 		numeric_inputs.at(numeric_inputs.size()-2), 
 		numeric_inputs.at(numeric_inputs.size()-1)
 	};
@@ -69,9 +67,11 @@ int main(void) {
 
     // run function on the list depending on letter code, using the parameters
     if (commandCode=="I") {
+		std::cout << "hello\n";
         submissionList.insertPosition(param_array[0], param_array[1]);
     }
     else if (commandCode=="D") {
+		std::cout << "hello\n";
         if (!submissionList.deletePosition(param_array[0])) {
             cout << "ERROR ";
         }
