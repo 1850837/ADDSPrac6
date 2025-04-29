@@ -18,7 +18,9 @@ LinkedList::LinkedList(int* array, int len){
     Node* current = head;
 
     for (int i = 1; i < len; i++){
-        current = new Node(array[i]);
+        Node* next = new Node(array[i]);
+        current->setNext(next);
+        current = next;
     }
 }
 
@@ -27,19 +29,19 @@ LinkedList::~LinkedList(){
 }
 
 void LinkedList::insertPosition(int pos, int newNum){
-
+    return;
 }
 
 bool LinkedList::deletePosition(int pos){
-
+    return 0;
 }
 
 int LinkedList::get(int pos){
-
+    return 0;
 }
 
 int LinkedList::search(int target){
-
+    return 0;
 }
 
 void LinkedList::printList(){
@@ -57,6 +59,7 @@ void LinkedList::printList(){
     //while loop to print
     while (current->getLink() != nullptr){
         std::cout << current->getData() << " ";
+        current = current->getLink();
     }
 
     //extra one for the loop that doesn't go

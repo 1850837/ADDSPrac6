@@ -34,6 +34,6 @@ void Node::setLink(Node* newLink){
 }
 
 void Node::setNext(Node* newNode){
-    link = newNode->getLink();
+    link = newNode;
     return;
 }
