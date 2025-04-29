@@ -67,11 +67,9 @@ int main(void) {
 
     // run function on the list depending on letter code, using the parameters
     if (commandCode=="I") {
-		std::cout << "hello\n";
         submissionList.insertPosition(param_array[0], param_array[1]);
     }
     else if (commandCode=="D") {
-		std::cout << "hello\n";
         if (!submissionList.deletePosition(param_array[0])) {
             cout << "ERROR ";
         }
