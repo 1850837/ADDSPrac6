@@ -110,6 +110,12 @@ int main(){
 
 	a.printList();
 
+	bool b = a.deletePosition(4);
+
+	a.printList();
+
+	std::cout << b << "\n";
+
 	return 0;
 
 }

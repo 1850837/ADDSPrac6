@@ -12,10 +12,10 @@ LinkedList::LinkedList(int* array, int len){
     }
 
     //initialise first node
-    head = new Node(array[0]);
+    Node* current = new Node(array[0]);
+    head = new Node(0, current);
 
     //initialising current pointer
-    Node* current = head;
 
     for (int i = 1; i < len; i++){
         Node* next = new Node(array[i]);
@@ -43,22 +43,25 @@ void LinkedList::insertPosition(int pos, int newNum){
     if (pos <= 1){
         Node* a = new Node(newNum, head->getLink());
         head->setLink(a);
+
+        return;
     }
 
     //all other cases
     else {
         //initialise iterator
         int i = 1;
-        Node* current = head;
+        Node* current = head->getLink();
         bool breaker = false;
 
-        while (i != pos - 1){
+        while (i != (pos - 1)){
             current = current->getLink();
             i++;
 
             //case for if the pos is greater than length
             if (current->getLink() == nullptr){
                 breaker = true;
+                break;
             }
         }
 
@@ -79,7 +82,52 @@ void LinkedList::insertPosition(int pos, int newNum){
 }
 
 bool LinkedList::deletePosition(int pos){
-    return 0;
+    //edge cases
+    if (pos <= 0){
+        return false;
+    }
+
+    //initialise variables
+    int iterator = 1;
+    Node* current = head->getLink();
+    bool breaker = false;
+
+    //case for pos == 1
+    if (pos == 1){
+        head->setLink(current->getLink());      //setting the header to point to item 2
+        delete current;     //deleting current
+        return true;
+    }
+
+    //other cases
+    while (iterator != (pos - 1)){
+        current = current->getLink();
+        iterator++;
+
+        if(current->getLink() == nullptr){
+            breaker = true;
+            break;
+        }
+    }
+
+    //case for pos out of bounds
+    if (breaker == true){
+        return false;
+    }
+
+    //actually deleting the node!
+    else{
+
+        current->setLink(current->getLink()->getLink());        //seg fault here or line below
+        delete current->getLink();
+
+        //std::cout << current->getData() << " " << current->getLink()->getData() << " " << current->getLink()->getLink()->getData() << "\n";
+
+        //need to address the case for pos = 5
+
+        return true;
+    }
+
 }
 
 int LinkedList::get(int pos){
@@ -98,7 +146,7 @@ void LinkedList::printList(){
     }
 
     //initialise current node
-    Node* current = head;
+    Node* current = head->getLink();
 
     std::cout << "[";
 
