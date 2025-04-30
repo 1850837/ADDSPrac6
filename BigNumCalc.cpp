@@ -137,16 +137,12 @@ std::list<int> BigNumCalc::sub(std::list<int> num1, std::list<int> num2){
 
         if (tempResult >= 0){
             result.push_front(tempResult);  //can never be greater than 1
-            std::cout << tempResult << " ";
             remainder = 0;
         }
         if (tempResult < 0){
             remainder = 1;
             result.push_front(10 + tempResult);
-            std::cout << tempResult;
-            std::cout << "+10 = " << 10+tempResult;
         }
-        std::cout << "\n";
 
         //iterate ptrs
         if (i < biggerNum.size() - 1){
