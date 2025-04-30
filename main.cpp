@@ -14,10 +14,10 @@ int main(){
     // }
     // std::cout << "\n";
 
-    std::list<int> num1 = a.buildBigNum("52983741982");
-    std::list<int> num2 = a.buildBigNum("238974120");
+    std::list<int> num1 = a.buildBigNum("123412351235");
+    std::list<int> num2 = a.buildBigNum("123346234783");
 
-    std::list<int> result = a.add(num1, num2);
+    std::list<int> result = a.sub(num1, num2);
     auto resultFront = result.begin();
 
     for (int i = 0; i < result.size(); i++){

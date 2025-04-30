@@ -1,6 +1,7 @@
 #include "BigNumCalc.h"
 #include <list>
 #include <string>
+#include <iostream> //delete later
 
 std::list<int> BigNumCalc::buildBigNum(std::string numString){
     std::list<int> result;
@@ -67,6 +68,117 @@ std::list<int> BigNumCalc::add(std::list<int> num1, std::list<int> num2){
 }
 
 std::list<int> BigNumCalc::sub(std::list<int> num1, std::list<int> num2){
+    //manage equality
+    if (num1 == num2){
+        std::list<int> a = {0};
+        return a;
+    }
+
+    bool negative;      //false if num1>num2, true if num2>num1
+
+    //working out if negative
+    if (num1.size() > num2.size()){
+        negative = false;
+    }
+    else if (num2.size() > num1.size()){
+        negative = true;
+    }
+    else if (num1.size() == num2.size()){
+        auto num1Front = num1.begin();
+        auto num2Front = num2.begin();
+
+        //compare individual numbers
+        for(int i = 0; i < num1.size(); i++){
+            if (*num1Front > *num2Front){
+                negative = false;
+                break;
+            }
+            if (*num2Front > *num1Front){
+                negative = true;
+                break;
+            }
+            if (num1Front == num2Front){
+                std::advance(num1Front, 1);
+                std::advance(num2Front, 1);
+            }
+        }
+    }
+
+    //calculating answer
+    int remainder = 0;
+    int tempResult = 0;
+    std::list<int> result;
+    int size;
+    
+    std::list<int> biggerNum;
+    std::list<int> smallerNum;
+
+    if (negative == false){
+        biggerNum = num1;
+        smallerNum = num2;
+    }
+    else if (negative == true){
+        biggerNum = num2;
+        smallerNum = num1;
+    }
+
+    //determining size
+    size = biggerNum.size();
+
+    //initialising ptrs
+    auto biggerNumPtr = biggerNum.end();
+    std::advance(biggerNumPtr, -1);
+    auto smallerNumPtr = smallerNum.end();
+    std::advance(smallerNumPtr, -1);
+
+    //loop
+    for (int i = 0; i < size; i++){
+        tempResult = *biggerNumPtr - *smallerNumPtr - remainder;
+
+        if (tempResult >= 0){
+            result.push_front(tempResult);  //can never be greater than 1
+            std::cout << tempResult << " ";
+            remainder = 0;
+        }
+        if (tempResult < 0){
+            remainder = 1;
+            result.push_front(10 + tempResult);
+            std::cout << tempResult;
+            std::cout << "+10 = " << 10+tempResult;
+        }
+        std::cout << "\n";
+
+        //iterate ptrs
+        if (i < biggerNum.size() - 1){
+            std::advance(biggerNumPtr, -1);
+        }
+        else if (i == biggerNum.size() - 1){
+            *biggerNumPtr = 0;
+        }
+
+        //iterating the num2Ptr
+        if (i < smallerNum.size() - 1){
+            std::advance(smallerNumPtr, -1);
+        }
+        else if (i == smallerNum.size() - 1){
+            *smallerNumPtr = 0;
+        }
+    }
+
+    //deal with leading 0s
+    while (result.front() == 0){
+        result.pop_front();
+    }
+
+    //deal with negatives
+    if (negative == true){
+        int temp = result.front();
+        result.pop_front();
+        temp = -1 * temp;
+        result.push_front(temp);
+    }
+
+    return result;
 
 }
 
