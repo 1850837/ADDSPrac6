@@ -71,7 +71,7 @@ void LinkedList::insertPosition(int pos, int newNum){
             i++;
 
             //case for if the pos is greater than length
-            if (current == nullptr){
+            if (current->getLink() == nullptr){
                 breaker = true;
                 break;
             }

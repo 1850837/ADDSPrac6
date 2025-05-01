@@ -1,6 +1,7 @@
 #include "BigNumCalc.h"
 #include <list>
 #include <string>
+#include <iostream> //delete later
 
 std::list<int> BigNumCalc::buildBigNum(std::string numString){
     std::list<int> result;
@@ -184,7 +185,20 @@ std::list<int> BigNumCalc::sub(std::list<int> num1, std::list<int> num2){
 }
 
 std::list<int> BigNumCalc::mul(std::list<int> num1, std::list<int> num2){
-    std::list<int> result = num1;
+    std::list<int> result;
+
+    //the case for either number being 0
+    if (*num1.begin() == 0){
+        result.push_back(0);
+        return result;
+    }
+    else if (*num2.begin() == 0){
+        result.push_back(0);
+        return result;
+    }
+
+    //all other cases
+    result = num1;
 
     for (int i = 0; i < *(num2.begin()) - 1; i++){
         result = add(result, num1);
