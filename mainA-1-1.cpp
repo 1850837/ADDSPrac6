@@ -43,13 +43,13 @@ int main(void) {
 
 	// copy all (but last 2) digits from vector into a c-array (to be passed into LinkedList constructor)
 	int array_size = numeric_inputs.size()-2;
-	int * input_array = new int[array_size];		//this is the error line!!
+	int * input_array = new int[array_size];
 	for(unsigned int i = 0; i < (numeric_inputs.size()-2); i++) {
 		input_array[i] = numeric_inputs[i];
 	}
 
 	// then, copy the last 2 digits from user_input (ie the parameters) into a parameter array
-	int param_array[2] = {
+	int param_array[2] = { 
 		numeric_inputs.at(numeric_inputs.size()-2), 
 		numeric_inputs.at(numeric_inputs.size()-1)
 	};
@@ -101,19 +101,3 @@ int main(void) {
 
 	return 0;
 }
-
-// int main(){
-
-// 	int arr[5] = {1, 2, 3, 4, 5};
-
-// 	LinkedList a = LinkedList(arr, 5);
-
-// 	a.printList();
-
-// 	int b = a.search(6);
-
-// 	std::cout << b << "\n";
-
-// 	return 0;
-
-// }
