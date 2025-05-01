@@ -73,7 +73,7 @@ std::list<int> BigNumCalc::sub(std::list<int> num1, std::list<int> num2){
         return a;
     }
 
-    bool negative;      //false if num1>num2, true if num2>num1
+    bool negative = false;      //false if num1>num2, true if num2>num1
 
     //working out if negative
     if (num1.size() > num2.size()){

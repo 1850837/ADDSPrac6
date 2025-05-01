@@ -14,10 +14,10 @@ int main(){
     // }
     // std::cout << "\n";
 
-    std::list<int> num1 = a.buildBigNum("230492");
-    std::list<int> num2 = a.buildBigNum("3");
+    std::list<int> num1 = a.buildBigNum("1234567890");
+    std::list<int> num2 = a.buildBigNum("9876543210");
 
-    std::list<int> result = a.mul(num1, num2);
+    std::list<int> result = a.add(num1, num2);
     auto resultFront = result.begin();
 
     for (int i = 0; i < result.size(); i++){
