@@ -5,7 +5,9 @@
 std::list<int> BigNumCalc::buildBigNum(std::string numString){
     std::list<int> result;
 
-    for (int i = 0; i < numString.size(); i++){
+    int size = numString.size();
+
+    for (int i = 0; i < size; i++){
         result.push_back((int)numString[i] - 48);
     }
 
@@ -41,18 +43,20 @@ std::list<int> BigNumCalc::add(std::list<int> num1, std::list<int> num2){
         remainder = (tempResult/10)%10;
 
         //iterating the num1Ptr
-        if (i < num1.size() - 1){
+        int num1Size = num1.size();
+        if (i < num1Size - 1){
             std::advance(num1Ptr, -1);
         }
-        else if (i == num1.size() - 1){
+        else if (i == num1Size - 1){
             *num1Ptr = 0;
         }
 
         //iterating the num2Ptr
-        if (i < num2.size() - 1){
+        int num2Size = num2.size();
+        if (i < num2Size - 1){
             std::advance(num2Ptr, -1);
         }
-        else if (i == num2.size() - 1){
+        else if (i == num2Size - 1){
             *num2Ptr = 0;
         }
     }
@@ -87,7 +91,8 @@ std::list<int> BigNumCalc::sub(std::list<int> num1, std::list<int> num2){
         auto num2Front = num2.begin();
 
         //compare individual numbers
-        for(int i = 0; i < num1.size(); i++){
+        int num1Size = num1.size();
+        for(int i = 0; i < num1Size; i++){
             if (*num1Front > *num2Front){
                 negative = false;
                 break;
@@ -144,18 +149,19 @@ std::list<int> BigNumCalc::sub(std::list<int> num1, std::list<int> num2){
         }
 
         //iterate ptrs
-        if (i < biggerNum.size() - 1){
+        if (i < size - 1){
             std::advance(biggerNumPtr, -1);
         }
-        else if (i == biggerNum.size() - 1){
+        else if (i == size - 1){
             *biggerNumPtr = 0;
         }
 
         //iterating the num2Ptr
-        if (i < smallerNum.size() - 1){
+        int smallNumSize = smallerNum.size();
+        if (i < smallNumSize - 1){
             std::advance(smallerNumPtr, -1);
         }
-        else if (i == smallerNum.size() - 1){
+        else if (i == smallNumSize - 1){
             *smallerNumPtr = 0;
         }
     }
